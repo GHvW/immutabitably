@@ -4,7 +4,7 @@ export interface Node<A> {
     next: Node<A> | null;
 }
 
-export class List<A> {
+export class List<A> implements Iterable<A> {
     private root: Node<A> | null;
     private last: Node<A> | null; // last will maintain a pointer to the virtual but potentially not actual end of the list; 
 
@@ -36,6 +36,14 @@ export class List<A> {
         const tail = this.root && this.root.next; // refactor to this.root?.next when 3.7 lands
         return [head, new List(tail)];
     }
+
+    *[Symbol.iterator](): IterableIterator<A> {
+        let nextNode = this.root;
+
+        while (nextNode !== null) {
+            yield nextNode.data;
+        }
+    } 
 
     private findLast(node: Node<A>): Node<A> {
         if (node.next === null) {

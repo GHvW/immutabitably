@@ -4,7 +4,8 @@
   "description": "An immutable list data structure thingy",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc && mocha dist/test",
+    "build": "tsc src"
   },
   "repository": {
     "type": "git",
